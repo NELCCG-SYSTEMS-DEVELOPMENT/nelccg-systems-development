@@ -1,0 +1,7 @@
+---
+layout: default
+---
+{%- assign date_format = site.date_format | default: "%b %-d, %Y" -%}
+<h2>{{ page.title | escape }}</h2>
+<div class="nhsuk-hint">{{ page.date | date: date_format }}</div>
+{{ content }}
