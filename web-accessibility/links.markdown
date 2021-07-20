@@ -10,4 +10,5 @@ layout: page
 
 ### World Wide Web Consortium (W3C)
 
+- [Web Accessibility Evaluation Tools List](https://www.w3.org/WAI/ER/tools/?q=wcag-21-w3c-web-content-accessibility-guidelines-21)
 - [Web Content Accessibility Guidelines (WCAG) Overview](https://www.w3.org/WAI/standards-guidelines/wcag/)
