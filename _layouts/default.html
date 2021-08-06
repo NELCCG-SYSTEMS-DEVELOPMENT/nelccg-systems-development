@@ -31,11 +31,11 @@
   <meta name="msapplication-square150x150logo" content="/assets/favicons/mediumtile-150x150.png">
   <meta name="msapplication-wide310x150logo" content="/assets/favicons/widetile-310x150.png">
   <meta name="msapplication-square310x310logo" content="/assets/favicons/largetile-310x310.png">
-
+  <script src="/js/main.js"></script>
 </head>
 
-<body class="">
-  <script src="/js/main.js"></script>
+<body>
+
   {%- assign default_paths = site.pages | map: "path" -%}
   {%- assign page_paths = site.header_pages | default: default_paths -%}
   {%- assign titles_size = site.pages | map: 'title' | join: '' | size -%}
@@ -52,6 +52,7 @@
           <span class="nhsuk-organisation-name">{{ site.organisation-name }}</span>
           <span class="nhsuk-organisation-descriptor">{{ site.organisation-descriptor }}</span>
         </a>
+
       </div>
       {%- if titles_size > 0 -%}
       <div class="nhsuk-header__content" id="content-header">
@@ -63,46 +64,125 @@
       {%- endif -%}
     </div>
     {%- if titles_size > 0 -%}
-  <nav class="nhsuk-header__navigation" id="header-navigation" role="navigation" aria-label="Primary navigation"
-    aria-labelledby="label-navigation">
-    <div class="nhsuk-width-container">
-      <p class="nhsuk-header__navigation-title"><span id="label-navigation">Menu</span>
-        <button class="nhsuk-header__navigation-close" id="close-menu">
-          <svg class="nhsuk-icon nhsuk-icon__close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-            aria-hidden="true" focusable="false">
-            <path
-              d="M13.41 12l5.3-5.29a1 1 0 1 0-1.42-1.42L12 10.59l-5.29-5.3a1 1 0 0 0-1.42 1.42l5.3 5.29-5.3 5.29a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l5.29-5.3 5.29 5.3a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42z">
-            </path>
-          </svg>
-          <span class="nhsuk-u-visually-hidden">Close menu</span>
-        </button>
-      </p>
-      <ul class="nhsuk-header__navigation-list">
-        {%- for path in page_paths -%}
-        {%- assign my_page = site.pages | where: "path", path | first -%}
-        {%- if my_page.title -%}
-        <li class="nhsuk-header__navigation-item {%- if my_page.title == 'Home' -%} nhsuk-header__navigation-item--for-mobile {%- endif -%}">
-          <a class="nhsuk-header__navigation-link" href="{{ my_page.url | relative_url }}">
-            {{ my_page.title | escape }}
-            <svg class="nhsuk-icon nhsuk-icon__chevron-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-              aria-hidden="true">
+    <nav class="nhsuk-header__navigation" id="header-navigation" role="navigation" aria-label="Primary navigation"
+      aria-labelledby="label-navigation">
+      <div class="nhsuk-width-container">
+        <p class="nhsuk-header__navigation-title"><span id="label-navigation">Menu</span>
+          <button class="nhsuk-header__navigation-close" id="close-menu">
+            <svg class="nhsuk-icon nhsuk-icon__close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+              aria-hidden="true" focusable="false">
               <path
-                d="M15.5 12a1 1 0 0 1-.29.71l-5 5a1 1 0 0 1-1.42-1.42l4.3-4.29-4.3-4.29a1 1 0 0 1 1.42-1.42l5 5a1 1 0 0 1 .29.71z">
+                d="M13.41 12l5.3-5.29a1 1 0 1 0-1.42-1.42L12 10.59l-5.29-5.3a1 1 0 0 0-1.42 1.42l5.3 5.29-5.3 5.29a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l5.29-5.3 5.29 5.3a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42z">
               </path>
             </svg>
-          </a>
+            <span class="nhsuk-u-visually-hidden">Close menu</span>
+          </button>
+        </p>
+        <ul class="nhsuk-header__navigation-list">
+          {%- for path in page_paths -%}
+          {%- assign nav_page = site.pages | where: "path", path | first -%}
+          {%- if nav_page.title -%}
+          <li
+            class="nhsuk-header__navigation-item {% if nav_page.title == 'Home' %} nhsuk-header__navigation-item--for-mobile {% endif %}">
+            <a class="nhsuk-header__navigation-link" href="{{ nav_page.url | relative_url }}">
+              {{ nav_page.title | escape }}
+              <svg class="nhsuk-icon nhsuk-icon__chevron-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                aria-hidden="true">
+                <path
+                  d="M15.5 12a1 1 0 0 1-.29.71l-5 5a1 1 0 0 1-1.42-1.42l4.3-4.29-4.3-4.29a1 1 0 0 1 1.42-1.42l5 5a1 1 0 0 1 .29.71z">
+                </path>
+              </svg>
+            </a>
+          </li>
+          {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+    </nav>
+    {%- endif -%}
+  </header>
+
+  {%- if page.hero_title -%}
+  <section class="nhsuk-hero">
+
+    <div class="nhsuk-width-container nhsuk-hero--border">
+      <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-two-thirds">
+          <div class="nhsuk-hero__wrapper">
+            {%- if page.lede -%}
+            <h1 class="nhsuk-u-margin-bottom-3">{{ page.hero_title }}</h1>
+            <p class="nhsuk-body-l nhsuk-u-margin-bottom-0">{{ page.lede }}</p>
+            {%- else -%}
+            <h1 class="nhsuk-u-margin-bottom-0">{{ page.hero_title }}</h1>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+  {%- endif -%}
+
+  {%- if page.url != '/' -%}
+  {%- assign crumbs = page.path | split: '/' -%}
+  {%- assign current_page = page -%}
+  <nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
+    <div class="nhsuk-width-container">
+      <ol class="nhsuk-breadcrumb__list">
+        <li class="nhsuk-breadcrumb__item">
+          <a class="nhsuk-breadcrumb__link" href="/">Systems Development</a>
+        </li>
+        {%- for crumb in crumbs -%}
+        {%- assign filename_without_extension = crumb | split:"." | first -%}
+        {%- assign route = route | append: '/' | append: filename_without_extension -%}
+        {%- assign page_path = route | replace_first: '/', '' | append: '.markdown' -%}
+        {%- assign page_path_alt = route | replace_first: '/', '' | append: '/index.markdown' -%}
+        {%- assign nav_page = site.pages | where: "path", page_path | first -%}
+        {%- unless nav_page -%}
+        {%- assign nav_page = site.pages | where: "path", page_path_alt | first -%}
+        {%- endunless -%}
+        {%- if nav_page and nav_page.path != current_page.path -%}
+        {%- assign parent = nav_page -%}
+        <li class="nhsuk-breadcrumb__item">
+          <a class="nhsuk-breadcrumb__link" href="{{ nav_page.url }}">{{ nav_page.title }}</a>
         </li>
         {%- endif -%}
         {%- endfor -%}
-      </ul>
+      </ol>
+
+      {%- unless parent -%}
+      <p class="nhsuk-breadcrumb__back">
+        <a class="nhsuk-breadcrumb__backlink" href="/">Systems Development</a>
+      </p>
+      {%- else -%}
+      <p class="nhsuk-breadcrumb__back">
+        <a class="nhsuk-breadcrumb__backlink" href="{{ parent.url }}">{{ parent.title }}</a>
+      </p>
+      {%- endunless -%}
+
     </div>
   </nav>
   {%- endif -%}
-  </header>
 
   <div class="nhsuk-width-container">
     <main role="main" class="nhsuk-main-wrapper">
-      {{ content }}
+      {%- unless page.hero_title -%}
+      <div class="nhsuk-u-reading-width">
+        <h1>{{ page.title }}</h1>
+        {%- if page.lede -%}
+        <p class="nhsuk-lede-text">{{ page.lede }}</p>
+        {%- endif -%}
+        {%- if page.date -%}
+        {%- assign date_format = site.date_format | default: "%b %-d, %Y" -%}
+        <div class="nhsuk-hint">{{ page.date | date: date_format }}</div>
+        {%-endif -%}
+      </div>
+      {%- endunless -%}
+
+      <article>
+        {{ content }}
+      </article>
+
     </main>
   </div>
 

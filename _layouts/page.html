@@ -27,17 +27,11 @@ layout: default
         </nav>
     </div>
     <div class="nhsuk-grid-column-three-quarters">
-        <h2>{{ page.title | escape }}</h2>
-        {% if page.date %}
-        <div class="nhsuk-hint">{{ page.date | date: date_format }}</div>
-        {%- endif -%}
-
         {{ content }}
     </div>
     {%- else -%}
     <div class="nhsuk-grid-column-full">
         <div class="nhsuk-u-reading-width">
-            <h2>{{ page.title | escape }}</h2>
             {% if page.date %}
             <div class="nhsuk-hint">{{ page.date | date: date_format }}</div>
             {%- endif -%}

@@ -24,7 +24,7 @@ layout: default
                             <a class="nhsuk-card__link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
                         </h2>
                         <div class="nhsuk-hint">{{ post.date | date: date_format }}</div>
-                        <p class="nhsuk-card__description">{{ post.excerpt }}</p>
+                        <div class="nhsuk-card__description">{{ post.excerpt }}</div>
                     </div>
                 </div>
             </li>
